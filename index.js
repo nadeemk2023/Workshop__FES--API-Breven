@@ -58,7 +58,17 @@
 axios
   .get('https://jsonplaceholder.typicode.com/users')
   .then(response => {
-    console.log(response.data.forEach(user => console.log(user.name)));
+    console.log(
+      response.data.forEach(user => {
+        console.groupCollapsed('Name:', user.name);
+        console.log('Username:', user.username);
+        console.log('Email:', user.email);
+        console.log('Phone:', user.phone);
+        console.log('Address:', user.address);
+        console.log('Company:', user.company);
+        console.groupEnd();
+      })
+    );
   })
   .catch(error => {
     if (error) {
