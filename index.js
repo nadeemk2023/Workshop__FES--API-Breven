@@ -35,3 +35,34 @@
 //   });
 
 // GET Request with Axios
+// axios
+//   .get('https://jsonplaceholder.typicode.com/posts')
+//   .then(response => {
+//     console.log('Status Code:', response.status);
+//     console.log('Data:', response.data);
+//   })
+//   .catch(error => {
+//     if (error.response) {
+//       console.error('Error Data:', error.response.data);
+//       console.error('Error Status', error.response.status);
+//     } else if (error.request) {
+//       // The request was made but no response was received
+//       console.error('Error Request:', error.request);
+//     } else {
+//       // Something happened in setting up the request that triggered an Error
+//       console.error('Error Message:', error.message);
+//     }
+//   });
+
+// TASK #2: Use Axios to fetch and display user information
+axios
+  .get('https://jsonplaceholder.typicode.com/users')
+  .then(response => {
+    console.log(response.data.forEach(user => console.log(user.name)));
+  })
+  .catch(error => {
+    if (error) {
+      console.log('Error Status:', error.response.status);
+      console.log('Error Data:', error.response.data);
+    }
+  });
