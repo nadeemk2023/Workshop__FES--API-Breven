@@ -55,24 +55,40 @@
 //   });
 
 // TASK #2: Use Axios to fetch and display user information
-axios
-  .get('https://jsonplaceholder.typicode.com/users')
-  .then(response => {
-    console.log(
-      response.data.forEach(user => {
-        console.groupCollapsed('Name:', user.name);
-        console.log('Username:', user.username);
-        console.log('Email:', user.email);
-        console.log('Phone:', user.phone);
-        console.log('Address:', user.address);
-        console.log('Company:', user.company);
-        console.groupEnd();
-      })
-    );
-  })
-  .catch(error => {
-    if (error) {
-      console.log('Error Status:', error.response.status);
-      console.log('Error Data:', error.response.data);
+// axios
+//   .get('https://jsonplaceholder.typicode.com/users')
+//   .then(response => {
+//     console.log(
+//       response.data.forEach(user => {
+//         console.groupCollapsed('Name:', user.name);
+//         console.log('Username:', user.username);
+//         console.log('Email:', user.email);
+//         console.log('Phone:', user.phone);
+//         console.log('Address:', user.address);
+//         console.log('Company:', user.company);
+//         console.groupEnd();
+//       })
+//     );
+//   })
+//   .catch(error => {
+//     if (error) {
+//       console.log('Error Status:', error.response.status);
+//       console.log('Error Data:', error.response.data);
+//     }
+//   });
+
+// ASYNC/AWAIT Syntax
+async function fetchData() {
+  try {
+    const response = await fetch('https://jsonplaceholder.typicode.com/posts');
+    if (!response.ok) {
+      throw new Error('Network response was not ok:', response.status);
     }
-  });
+    const data = await response.json();
+    console.log('Data received:', data);
+  } catch (error) {
+    console.error('There was a problem with the fetch operation:', error);
+  }
+}
+
+fetchData();
