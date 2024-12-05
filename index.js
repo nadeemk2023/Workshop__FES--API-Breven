@@ -120,13 +120,13 @@ function fetchUserData() {
       return response.json();
     })
     .then(userData => {
-      console.log(userData);
-      const { id, followers, avatar_url, html_url } = userData;
+      const { id, followers, avatar_url, html_url, public_repos } = userData;
       userDataContainerEl.innerHTML = `
         <h2>Username: ${username}</h2>
         <p>UserID: ${id}</p>
+        <p>Public Repos: ${public_repos}</p>
         <p>Followers: ${followers}</p>
-        <img src="${avatar_url}" alt="${username}" style="width: 100px; height: 100px"/>
+        <img src="${avatar_url}" alt="${username}" style="width: 200px; height: 200px"/>
         <a href="${html_url}" target="_blank" style="display:block">View Profile</a>
         `;
     })
