@@ -28,8 +28,7 @@ fetch(`https://jsonplaceholder.typicode.com/posts`)
     return response.json();
   })
   .then(posts => {
-    console.log('Post titles received:');
-    posts.forEach(post => console.log(post.title));
+    posts.forEach(post => console.log('Post title:', post.title));
   })
   .catch(error => {
     console.error('There was an error retrieving the posts:', error);
