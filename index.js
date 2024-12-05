@@ -101,7 +101,7 @@ const userDataContainerEl = document.querySelector('#user-data');
 fetchBtnEl.addEventListener('click', fetchUserData);
 
 function fetchUserData() {
-  const username = userInputEl.value;
+  const username = userInputEl.value.trim();
 
   if (!username) {
     alert('Please enter a username');
@@ -120,10 +120,14 @@ function fetchUserData() {
       return response.json();
     })
     .then(userData => {
+      console.log(userData);
+      const { id, followers, avatar_url, html_url } = userData;
       userDataContainerEl.innerHTML = `
         <h2>Username: ${username}</h2>
-        <p>UserID: ${userData.id}</p>
-        <img src="${userData.avatar_url}" alt="${userData.name}" style="width: 200px"/>
+        <p>UserID: ${id}</p>
+        <p>Followers: ${followers}</p>
+        <img src="${avatar_url}" alt="${username}" style="width: 100px; height: 100px"/>
+        <a href="${html_url}" target="_blank" style="display:block">View Profile</a>
         `;
     })
     .catch(error => {
