@@ -78,17 +78,56 @@
 //   });
 
 // ASYNC/AWAIT Syntax
-async function fetchData() {
-  try {
-    const response = await fetch('https://jsonplaceholder.typicode.com/posts');
-    if (!response.ok) {
-      throw new Error('Network response was not ok:', response.status);
-    }
-    const data = await response.json();
-    console.log('Data received:', data);
-  } catch (error) {
-    console.error('There was a problem with the fetch operation:', error);
-  }
-}
+// async function fetchData() {
+//   try {
+//     const response = await fetch('https://jsonplaceholder.typicode.com/posts');
+//     if (!response.ok) {
+//       throw new Error('Network response was not ok:', response.status);
+//     }
+//     const data = await response.json();
+//     console.log('Data received:', data);
+//   } catch (error) {
+//     console.error('There was a problem with the fetch operation:', error);
+//   }
+// }
+//
+// fetchData();
 
-fetchData();
+// Dynamic Example
+const userInputEl = document.querySelector('#username');
+const fetchBtnEl = document.querySelector('#fetch-btn');
+const userDataContainerEl = document.querySelector('#user-data');
+
+fetchBtnEl.addEventListener('click', fetchUserData);
+
+function fetchUserData() {
+  const username = userInputEl.value;
+
+  if (!username) {
+    alert('Please enter a username');
+    return;
+  }
+
+  userDataContainerEl.innerHTML = '<p>Loading...</p>';
+  userDataContainerEl.style = 'text-align:center';
+
+  fetch(`https://api.github.com/users/${username}`)
+    .then(response => {
+      if (!response.ok) {
+        console.log('Response:', response);
+        throw new Error('User not found');
+      }
+      return response.json();
+    })
+    .then(userData => {
+      userDataContainerEl.innerHTML = `
+        <h2>Username: ${username}</h2>
+        <p>UserID: ${userData.id}</p>
+        <img src="${userData.avatar_url}" alt="${userData.name}" style="width: 200px"/>
+        `;
+    })
+    .catch(error => {
+      console.error(error);
+      userDataContainerEl.innerHTML = `<p style="color:red;">${error.message}</p>`;
+    });
+}
